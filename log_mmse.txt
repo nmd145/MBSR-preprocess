@@ -1,0 +1,14 @@
+2020-11-16 11:27:14,569::root::INFO::Found 3462 files, ...
+2020-11-16 11:27:14,576::root::INFO::Loading ./output_2/output/task_B18_1718_35_emg_removed.npy, shape = (10, 7500)
+2020-11-16 11:27:14,581::root::INFO::./output_2/output/task_B18_1718_35_emg_removed.npy, calculating mmse
+2020-11-16 11:29:08,826::root::INFO::Found 3462 files, ...
+2020-11-16 11:29:08,834::root::INFO::Loading ./output_2/output/task_B18_1718_35_emg_removed.npy, shape = (10, 7500)
+2020-11-16 11:29:08,835::root::INFO::./output_2/output/task_B18_1718_35_emg_removed.npy, calculating mmse
+2020-11-16 11:30:24,230::root::INFO::./output_2/output/task_B18_1718_35_emg_removed.npy:saving to file task_B18_1718_35_mmse.npy
+2020-11-16 11:30:24,230::root::INFO::./output_2/output/task_B18_1718_35_emg_removed.npy:saved task_B18_1718_35_mmse.npy
+2020-11-16 11:30:24,230::root::INFO::Loading ./output_2/output/task_B21_1690_47_emg_removed.npy, shape = (10, 6500)
+2020-11-16 11:30:24,231::root::INFO::./output_2/output/task_B21_1690_47_emg_removed.npy, calculating mmse
+2020-11-16 11:31:22,442::root::INFO::./output_2/output/task_B21_1690_47_emg_removed.npy:saving to file task_B21_1690_47_mmse.npy
+2020-11-16 11:31:22,442::root::INFO::./output_2/output/task_B21_1690_47_emg_removed.npy:saved task_B21_1690_47_mmse.npy
+2020-11-16 11:31:22,443::root::INFO::Loading ./output_2/output/task_A17_1533_0_emg_removed.npy, shape = (10, 7500)
+2020-11-16 11:31:22,443::root::INFO::./output_2/output/task_A17_1533_0_emg_removed.npy, calculating mmse
