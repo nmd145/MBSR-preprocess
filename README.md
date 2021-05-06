@@ -1,6 +1,6 @@
-EEG signal preprocessing
-For MBSR project
-## Getting started 
+**EEG signal preprocessing
+for MBSR project
+**## Getting started 
 
 It is recommended to use a virtual environment to avoid any possible version conflicts. Inside the project directory, run:
 ```shell
