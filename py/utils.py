@@ -170,7 +170,6 @@ def create_features(data):
     # Return merged features
     return np.concatenate((data_spectral, data_dwt, data_autoreg, data_sg), axis=1)
 
-
 def shift_data(data, k=1):
     """
     Shift data by k time points
@@ -179,15 +178,92 @@ def shift_data(data, k=1):
     shifted[:k, :] = 0
     return shifted
 
-def plot_raw(data, eeg, figsize=(25, 20), title="Raw"):
+def plot_raw(data, 
+             eeg, 
+             figsize=(25, 20), 
+             y_unit='V',
+             fs=500,
+             title='Raw'):
     fig, axes = plt.subplots(data.shape[1], 1, figsize=figsize)
+    dim_x, dim_y = data.shape
+    time_total = dim_x / fs
+    time = np.linspace(0,time_total,num=dim_x)
+    if y_unit == 'mV':
+        data = data * 10e3
+    elif y_unit == 'uV':
+        data = data * 10e6
     for i, ch in enumerate(eeg.ch_names):
         ax = axes[i]
-        ax.plot(data[:, i], linewidth=0.8, color="black")
-        ax.axis("off")
+        ax.plot(time, data[:,i], linewidth=0.8, color="black")
         ax.set_title(f"{ch}", loc="left")
+        ax.set_ylabel(y_unit)
+        ax.set_xlabel('time (s)')
     fig.suptitle(title, fontsize=20)
     plt.show(block=False)
+    
+def plot_channel_imfs(data, 
+             eeg, 
+             imf_idx=0,
+             figsize=(25, 20), 
+             y_unit='V',
+             fs=500,
+             title='Raw'):
+    channel_data = data[:,imf_idx,:]
+    fig, axes = plt.subplots(channel_data.shape[1], 1, figsize=figsize)
+    dim_x, dim_y = channel_data.shape
+    time_total = dim_x / fs
+    time = np.linspace(0,time_total,num=dim_x)
+    if y_unit == 'mV':
+        channel_data = channel_data * 10e3
+    elif y_unit == 'uV':
+        channel_data = channel_data * 10e6
+    for i, ch in enumerate(eeg.ch_names):
+        ax = axes[i]
+        ax.plot(time, channel_data[:, i], linewidth=0.8)
+        ax.set_title(f"{ch}", loc="left")
+        ax.set_ylabel(y_unit)
+        ax.set_xlabel('time (s)')
+    fig.suptitle(title, fontsize=20)
+    plt.show(block=False)
+    
+def plot_imfs(data, 
+              n_imfs=10, 
+              figsize=(25, 20), 
+              title="IMF", 
+              fs=500,
+              y_unit = 'V'):
+    """
+    Plot components
+    """
+    dim_x, dim_y = data.shape
+    time_total = dim_x / fs
+    time = np.linspace(0,time_total,num=dim_x)
+    fig, axes = plt.subplots(n_imfs, 1, figsize=figsize)
+    print(n_imfs)
+    if y_unit == 'mV':
+        data = data * 10e3
+    if y_unit == 'uV':
+        data = data * 10e6
+    for i in range(n_imfs):
+        ax = axes[i]
+        ax.plot(time, data[:,i], linewidth=0.8)
+        #plt.xticks(#np.arange(0,time,100))
+        #ax.axis("off")
+        ax.set_title(f"imf {i+1}", loc='left')
+        ax.set_ylabel(y_unit)
+        ax.set_xlabel("time (s)")
+    fig.suptitle(title, fontsize=20)
+    plt.show(block=False)
+    
+#def plot_raw(data, eeg, figsize=(25, 20), title="Raw"):
+#    fig, axes = plt.subplots(data.shape[1], 1, figsize=figsize)
+#    for i, ch in enumerate(eeg.ch_names):
+#        ax = axes[i]
+#        ax.plot(data[:, i], linewidth=0.8, color="black")
+#        ax.axis("off")
+#        ax.set_title(f"{ch}", loc="left")
+#    fig.suptitle(title, fontsize=20)
+#    plt.show(block=False)
 
 def plot_psd(data1, data2, eeg, figsize=(25, 20), title="PSD Plots"):
     fig, axes = plt.subplots(data1.shape[1] // 2, 2, figsize=figsize, sharex='col')
