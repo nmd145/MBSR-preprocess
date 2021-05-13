@@ -280,16 +280,45 @@ def plot_psd(data1, data2, eeg, figsize=(25, 20), title="PSD Plots"):
     fig.suptitle(title, fontsize=20)
     plt.show(block=False)
 
-def plot_components(data, n_components, figsize=(25, 20), title="CCA components"):
+#def plot_components(data, n_components, figsize=(25, 20), title="CCA components"):
     """
     Plot components
     """
-    fig, axes = plt.subplots(n_components, 1, figsize=figsize)
-    print(n_components)
-    for i in range(n_components):
+    #fig, axes = plt.subplots(n_components, 1, figsize=figsize)
+    #print(n_components)
+    #for i in range(n_components):
+    #    ax = axes[i]
+    #    ax.plot(data[:, i], linewidth=0.8)
+    #    ax.axis("off")
+   #     ax.set_title(f"comp {i}", loc="left")
+   # fig.suptitle(title, fontsize=20)
+   # plt.show(block=False)
+    
+def plot_components(data, 
+              n_component=10, 
+              figsize=(25, 20), 
+              title="Components", 
+              fs=500,
+              y_unit = 'V'):
+    """
+    Plot components
+    """
+    dim_x, dim_y = data.shape
+    time_total = dim_x / fs
+    time = np.linspace(0,time_total,num=dim_x)
+    fig, axes = plt.subplots(n_component, 1, figsize=figsize)
+    print(n_component)
+    if y_unit == 'mV':
+        data = data * 10e3
+    if y_unit == 'uV':
+        data = data * 10e6
+    for i in range(n_imfs):
         ax = axes[i]
-        ax.plot(data[:, i], linewidth=0.8)
-        ax.axis("off")
-        ax.set_title(f"comp {i}", loc="left")
+        ax.plot(time, data[:,i], linewidth=0.8)
+        #plt.xticks(#np.arange(0,time,100))
+        #ax.axis("off")
+        ax.set_title(f"component {i}", loc='left')
+        ax.set_ylabel(y_unit)
+        ax.set_xlabel("time (s)")
     fig.suptitle(title, fontsize=20)
     plt.show(block=False)
