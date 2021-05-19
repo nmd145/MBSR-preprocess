@@ -334,9 +334,9 @@ def plot_fft(data_1, data_2, eeg, FS , figsize = (20,15)): # data with all chann
         T = N/ FS # data points 
         freq = n/T 
         ax.stem(freq, np.abs(eeg_fft), 'b', \
-                markerfmt=" ", basefmt="-b", label = 'baselined_raw')
+                markerfmt=" ", basefmt="-b", label = 'Before', alpha=0.7)
         ax.stem(freq, np.abs(eeg_fft_2), 'r', \
-                markerfmt=" ", basefmt="-r", label = 'eemd')
+                markerfmt=" ", basefmt="-r", label = 'After')
         ax.set_xlim(0,50)
         ax.set_ylim(0,4)
         ax.legend()
