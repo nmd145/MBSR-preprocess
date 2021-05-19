@@ -322,3 +322,26 @@ def plot_components(data,
         ax.set_xlabel("time (s)")
     fig.suptitle(title, fontsize=20)
     plt.show(block=False)
+
+def plot_fft(data_1, data_2, eeg, FS , figsize = (20,15)): # data with all channel 
+    fig, axes = plt.subplots(data_1.shape[1], 1, figsize=figsize)
+    for i, ax in enumerate(axes.flat):
+
+        eeg_fft = fft(data_1[:,i])
+        eeg_fft_2 = fft(data_2[:,i]) 
+        N = len(eeg_fft)
+        n = np.arange(N)
+        T = N/ FS # data points 
+        freq = n/T 
+        ax.stem(freq, np.abs(eeg_fft), 'b', \
+                markerfmt=" ", basefmt="-b", label = 'baselined_raw')
+        ax.stem(freq, np.abs(eeg_fft_2), 'r', \
+                markerfmt=" ", basefmt="-r", label = 'eemd')
+        ax.set_xlim(0,50)
+        ax.set_ylim(0,4)
+        ax.legend()
+
+        ax.set_title(f"{eeg.ch_names[i]}", loc="left")
+
+        plt.tight_layout()
+        plt.show()
