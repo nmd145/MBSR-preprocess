@@ -345,3 +345,10 @@ def plot_fft(data_1, data_2, eeg, FS , figsize = (20,15)): # data with all chann
 
         plt.tight_layout()
         plt.show()
+def get_start_timestamp(meas_date, start_time): 
+    adjusted_meas_date = meas_date - 7*3600
+    meas_date_obj = datetime.fromtimestamp(adjusted_meas_date)
+    start_time_obj = datetime.strptime(start_time,"%I:%M:%S %p")
+    seconds_start = start_time_obj.second + start_time_obj.minute*60 + start_time_obj.hour*3600 
+    seconds_meas = meas_date_obj.second + meas_date_obj.minute*60 + meas_date_obj.hour*3600 
+    return meas_date - seconds_meas + seconds_start
